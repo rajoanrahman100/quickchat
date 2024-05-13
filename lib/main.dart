@@ -27,8 +27,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: theme(),
-      // home: FirebaseAuth.instance.currentUser != null ? HomeScreen() : LoginScreen(),
-      home:  SignUpScreen(),
+      home: FirebaseAuth.instance.currentUser != null ? HomeScreen() : LoginScreen(),
+
     );
   }
 }
