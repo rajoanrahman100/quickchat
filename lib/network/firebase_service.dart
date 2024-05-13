@@ -33,7 +33,7 @@ class FireStoreService extends BaseFireStoreService {
   Future<void> getUserDataFromFireStore(String collectionName, String docName) async {
     // TODO: implement getUserDataFromFireStore
     try {
-      final userData = await _fireStore.collection(collectionName).doc(docName).get();
+      final userData = await _fireStore.collection(collectionName).get();
     } catch (e) {
       print(e);
       throw Exception(e.toString());

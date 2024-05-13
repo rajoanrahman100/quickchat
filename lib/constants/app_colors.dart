@@ -61,7 +61,7 @@ class AppColors {
   static const Color success800 = Color(0xFF0A653A);
   static const Color success900 = Color(0xFF084d2d);
 
-  static const Color surfaceColor = Color(0xFFFBFBFB);
+  static const Color surfaceColor = Color(0xFFF5F5F5);
   static const Color purple = Color(0xFF5041AB);
   static const Color yellow = Color(0xFFF5B544);
   static const Color cyan = Color(0xFF06C1FF);

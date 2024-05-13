@@ -5,14 +5,6 @@ import 'package:quick_chat/network/firebase_auth.dart';
 import 'package:quick_chat/network/firebase_service.dart';
 import 'package:quick_chat/repository/auth_repository.dart';
 
-final authRepositoryProvider = Provider<AuthRepository>((ref) {
-  return AuthRepository(FirebaseAuth.instance);
-});
-
-final authStateProvider = StreamProvider<User?>((ref) {
-  return ref.read(authRepositoryProvider).authStateChange;
-});
-
 final authProvider = ChangeNotifierProvider<AuthProvider>((ref) {
   return AuthProvider();
 });

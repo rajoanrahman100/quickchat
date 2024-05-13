@@ -16,4 +16,6 @@ class AppAssets{
   static const String noteImage="$assetImage/note_image.png";
   static const String googleImage="$assetImage/google_image.png";
 
+  //Image Assets
+  static const String chatImage="$assetImage/live_chat.png";
 }

@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quick_chat/constants/app_theme.dart';
 import 'package:quick_chat/helper/firebase_options.dart';
 import 'package:quick_chat/ui/home_screen.dart';
-import 'package:quick_chat/ui/login_screen.dart';
-import 'package:quick_chat/ui/signup_screen.dart';
+import 'package:quick_chat/ui/login_screen/login_screen.dart';
+import 'package:quick_chat/ui/sign_up_screen/signup_screen.dart';
 
 
 void main()async {
@@ -27,7 +27,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: theme(),
-      home: FirebaseAuth.instance.currentUser != null ? HomeScreen() : LoginScreen(),
+      // home: FirebaseAuth.instance.currentUser != null ? HomeScreen() : LoginScreen(),
+      home:  SignUpScreen(),
     );
   }
 }
