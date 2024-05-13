@@ -1,0 +1,202 @@
+{
+  "project_info": {
+    "project_number": "1070554179849",
+    "project_id": "imam-development-programme",
+    "storage_bucket": "imam-development-programme.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070554179849:android:bbff811e43b7993b6f4bd8",
+        "android_client_info": {
+          "package_name": "com.example.quick_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1070554179849-a0igm7t5esotnmgmalndpg8kjiiombp1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5tUB_qf_1m5qYbgj_fzf7m3aQHtNDe7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1070554179849-a0igm7t5esotnmgmalndpg8kjiiombp1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1070554179849-2vcquravt8mmrvk5kg7uvvoeeb4gk3kb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rifat.securenotes"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070554179849:android:cee8b5f7bc3b23b66f4bd8",
+        "android_client_info": {
+          "package_name": "com.rifat.securenotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1070554179849-3dnu822km88tg2rvkoqdolni6ih2hh7r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rifat.securenotes",
+            "certificate_hash": "f2889179548a7b3d24273d2afdeee34055793ef6"
+          }
+        },
+        {
+          "client_id": "1070554179849-l4phrt3u9hcujadsloe0uebfsdula9f8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rifat.securenotes",
+            "certificate_hash": "f91a194e33f1d65f0413877e676da9ba27782bd4"
+          }
+        },
+        {
+          "client_id": "1070554179849-a0igm7t5esotnmgmalndpg8kjiiombp1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5tUB_qf_1m5qYbgj_fzf7m3aQHtNDe7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1070554179849-a0igm7t5esotnmgmalndpg8kjiiombp1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1070554179849-2vcquravt8mmrvk5kg7uvvoeeb4gk3kb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rifat.securenotes"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070554179849:android:632538995846b1d56f4bd8",
+        "android_client_info": {
+          "package_name": "com.tasnim.idp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1070554179849-5cijot4asvubcnfkk8t047e7n3k9fv8s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tasnim.idp",
+            "certificate_hash": "f91a194e33f1d65f0413877e676da9ba27782bd4"
+          }
+        },
+        {
+          "client_id": "1070554179849-agfhhj1bhrs07n3btash9vcfdithjjss.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tasnim.idp",
+            "certificate_hash": "f2889179548a7b3d24273d2afdeee34055793ef6"
+          }
+        },
+        {
+          "client_id": "1070554179849-a0igm7t5esotnmgmalndpg8kjiiombp1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5tUB_qf_1m5qYbgj_fzf7m3aQHtNDe7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1070554179849-a0igm7t5esotnmgmalndpg8kjiiombp1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1070554179849-2vcquravt8mmrvk5kg7uvvoeeb4gk3kb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rifat.securenotes"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070554179849:android:e5b4c2b35ad3b48e6f4bd8",
+        "android_client_info": {
+          "package_name": "com.tasnim.imam_development_programm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1070554179849-oiu7fsqhbm2ibb3c375v596cd6v4ue08.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tasnim.imam_development_programm",
+            "certificate_hash": "f2889179548a7b3d24273d2afdeee34055793ef6"
+          }
+        },
+        {
+          "client_id": "1070554179849-outqjib4a0j03rgd9ie3390mu8f1hh8j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tasnim.imam_development_programm",
+            "certificate_hash": "f91a194e33f1d65f0413877e676da9ba27782bd4"
+          }
+        },
+        {
+          "client_id": "1070554179849-a0igm7t5esotnmgmalndpg8kjiiombp1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5tUB_qf_1m5qYbgj_fzf7m3aQHtNDe7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1070554179849-a0igm7t5esotnmgmalndpg8kjiiombp1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1070554179849-2vcquravt8mmrvk5kg7uvvoeeb4gk3kb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rifat.securenotes"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
