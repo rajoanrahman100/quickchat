@@ -1,5 +1,10 @@
 class AppAssets{
 
+  //Collection Name
+  static const String userCollection="user";
+  static const String chatCollection="chats";
+
+
   static const String assetLottie="assets/lottie";
   static const String assetFont="assets/fonts";
   static const String assetIcon="assets/icon";
