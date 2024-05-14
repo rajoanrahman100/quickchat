@@ -8,26 +8,18 @@ import 'package:quick_chat/constants/app_colors.dart';
 import 'package:quick_chat/constants/text_styles.dart';
 import 'package:quick_chat/network/chat_service.dart';
 
-class ChatScreen extends StatefulWidget {
+class ChatScreen extends StatelessWidget {
   final String id;
   final String name;
   final String email;
 
   ChatScreen({super.key, required this.id, required this.name, required this.email});
 
-  @override
-  State<ChatScreen> createState() => _ChatScreenState();
-}
-
-class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController messageController = TextEditingController();
-  final ChatService chatService = ChatService();
-  final FirebaseAuth auth = FirebaseAuth.instance;
 
-  @override
-  void initState() {
-    super.initState();
-  }
+  final ChatService chatService = ChatService();
+
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +30,7 @@ class _ChatScreenState extends State<ChatScreen> {
         centerTitle: true,
         elevation: 0.0,
         title: Text(
-          widget.email,
+          email,
           style: bodySemiBold14.copyWith(color: AppColors.kBSDark),
         ),
       ),
@@ -56,7 +48,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Widget _buildMessageList() {
     return StreamBuilder(
-        stream: chatService.getMessages(widget.id, auth.currentUser!.uid),
+        stream: chatService.getMessages(id, auth.currentUser!.uid),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -129,7 +121,7 @@ class _ChatScreenState extends State<ChatScreen> {
         const Gap(10.0),
         GestureDetector(
           onTap: () {
-            chatService.writeMessage(messageController, widget.id);
+            chatService.writeMessage(messageController, id);
           },
           child: const Icon(
             Icons.send,
