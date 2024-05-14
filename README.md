@@ -8,7 +8,7 @@ user authentication
 
 - **User Authentication:** Users can sign in and sign up by providing their name, email and password.
 - **Riverpod State Management:** Utilizes Riverpod for efficient and reactive state management.
-- **Real Time Notification:** One to one real time seamless notification among the users.
+- **Real Time Messaging:** One to one real time seamless messaging among the users.
 - **Notification:** Notify users if any new message has sent.
 
 ## Packages have been using
