@@ -1,16 +1,38 @@
-# quick_chat
+# QuickChat
 
-A new Flutter project.
+QuickChat is a simple one-to-one chat application built using Flutter and Firebase. With QuickChat,
+users can easily connect and chat with friends in real-time. Features include real-time messaging,
+user authentication
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- **User Authentication:** Users can sign in and sign up by providing their name, email and password.
+- **Riverpod State Management:** Utilizes Riverpod for efficient and reactive state management.
+- **Real Time Notification:** One to one real time seamless notification among the users.
+- **Notification:** Notify users if any new message has sent.
 
-A few resources to get you started if this is your first Flutter project:
+## Packages have been using
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<ul>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  <li><a href="https://pub.dev/packages/firebase_core">Firebase Auth</a></li>
+  <li><a href="https://pub.dev/packages/firebase_auth">Firebase Core</a></li>
+  <li><a href="https://pub.dev/packages/firebase_messaging">Firebase Messaging</a></li>
+  <li><a href="https://pub.dev/packages/flutter_local_notifications">Local Notification</a></li>
+  <li><a href="https://pub.dev/packages/timezone">Timezone</a></li>
+  <li><a href="https://pub.dev/packages/flutter_riverpod">Flutter Riverpod</a></li>
+  <li><a href="https://pub.dev/packages/flutter_hooks">Flutter Hooks</a></li>
+  <li><a href="https://pub.dev/packages/go_router">Go Router</a></li>
+
+</ul>
+
+
+### Flutter Installation
+
+## Prerequisites
+
+- Flutter SDK: [Installation Guide](https://flutter.dev/docs/get-started/install)
+
+## Installation
+```bash
+   git clone https://github.com/rajoanrahman100/quickchat.git
