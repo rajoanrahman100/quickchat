@@ -6,7 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quick_chat/constants/app_assets.dart';
-import 'package:quick_chat/model/user_model.dart';
+import 'package:quick_chat/feature/home_screen/model/user_model.dart';
 import 'package:quick_chat/network/firebase_auth.dart';
 import 'package:quick_chat/network/firebase_service.dart';
 

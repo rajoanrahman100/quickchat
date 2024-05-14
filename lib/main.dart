@@ -5,26 +5,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quick_chat/constants/app_theme.dart';
-import 'package:quick_chat/feature/home_screen/home_screen.dart';
-import 'package:quick_chat/feature/login_screen/login_screen.dart';
+import 'package:quick_chat/feature/home_screen/ui/home_screen.dart';
+import 'package:quick_chat/feature/login_screen/ui/login_screen.dart';
 import 'package:quick_chat/helper/firebase_options.dart';
 import 'package:quick_chat/network/notification_service.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
-// const AndroidNotificationChannel channel = AndroidNotificationChannel(
-//     'high_importance_channel', // id
-//     'High Importance Notifications', // title
-//     description: 'This channel is used for important notifications.', // description
-//     importance: Importance.high,
-//     playSound: true);
-// final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-//
-// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-//   await Firebase.initializeApp(
-//     options: DefaultFirebaseOptions.currentPlatform,
-//   );
-//   print('A bg message just showed up :  ${message.messageId}');
-// }
+const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'high_importance_channel', // id
+    'High Importance Notifications', // title
+    description: 'This channel is used for important notifications.', // description
+    importance: Importance.high,
+    playSound: true);
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  print('A bg message just showed up :  ${message.messageId}');
+}
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,10 +33,10 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   NotificationService().initNotification();
-/*  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-      ?.createNotificationChannel(channel);*/
+      ?.createNotificationChannel(channel);
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,

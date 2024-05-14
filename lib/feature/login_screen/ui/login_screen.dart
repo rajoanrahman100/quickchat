@@ -5,13 +5,13 @@ import 'package:quick_chat/constants/app_assets.dart';
 import 'package:quick_chat/constants/app_colors.dart';
 import 'package:quick_chat/constants/context_extention.dart';
 import 'package:quick_chat/constants/text_styles.dart';
-import 'package:quick_chat/feature/home_screen/home_screen.dart';
-import 'package:quick_chat/feature/login_screen/login_screen.dart';
+import 'package:quick_chat/feature/home_screen/ui/home_screen.dart';
+import 'package:quick_chat/feature/sign_up_screen/ui/signup_screen.dart';
 import 'package:quick_chat/helper/validation.dart';
-import 'package:quick_chat/riverpod/auth_provider.dart';
+import 'package:quick_chat/feature/sign_up_screen/controller/auth_provider.dart';
 
-class SignUpScreen extends ConsumerWidget {
-  final nameController = TextEditingController();
+
+class LoginScreen extends ConsumerWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -21,6 +21,7 @@ class SignUpScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authNotifier = ref.watch(authProvider);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.surfaceColor,
       appBar: AppBar(
         backgroundColor: AppColors.white,
@@ -28,7 +29,7 @@ class SignUpScreen extends ConsumerWidget {
         elevation: 0.0,
         automaticallyImplyLeading: false,
         title: Text(
-          "Sign Up",
+          "Sign In",
           style: bodySemiBold14.copyWith(color: AppColors.kBSDark),
         ),
       ),
@@ -46,26 +47,10 @@ class SignUpScreen extends ConsumerWidget {
               ),
               const Gap(60.0),
               Text(
-                "Let's create an account for you",
+                "Let's connect with friends",
                 style: bodySemiBold14.copyWith(color: AppColors.kBSDark),
               ),
               const Gap(20.0),
-              TextFormField(
-                style: bodyMedium14.copyWith(color: AppColors.kBSDark),
-                controller: nameController,
-                decoration: const InputDecoration(
-                  hintText: "Name",
-                  filled: true,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                  fillColor: AppColors.white,
-                  border: OutlineInputBorder(borderSide: BorderSide.none),
-                  focusedBorder: OutlineInputBorder(borderSide: BorderSide.none),
-                  enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
-                  errorBorder: OutlineInputBorder(borderSide: BorderSide.none),
-                ),
-                validator: Validations.validateName,
-              ),
-              const Gap(15.0),
               TextFormField(
                 style: bodyMedium14.copyWith(color: AppColors.kBSDark),
                 controller: emailController,
@@ -109,7 +94,7 @@ class SignUpScreen extends ConsumerWidget {
                 onPressed: () async {
                   if (formKey.currentState!.validate()) {
                     FocusScope.of(context).unfocus();
-                    authNotifier.signUpUserWithFirebase(emailController.text, passwordController.text, nameController.text).then((value) {
+                    authNotifier.loginUserWithFirebase(emailController.text, passwordController.text).then((value) {
                       context.navigateToScreen(isReplaced: true, child: const HomeScreen());
                     });
                   }
@@ -118,20 +103,14 @@ class SignUpScreen extends ConsumerWidget {
                     ? const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: CircularProgressIndicator(
-                                color: AppColors.white,
-                                strokeWidth: 2.0,
-                              )),
+                          SizedBox(height: 20,width: 20,child: CircularProgressIndicator(color: AppColors.white,strokeWidth: 2.0,)),
                         ],
                       )
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Sign Up',
+                            'Sign In',
                             style: bodySemiBold14.copyWith(color: AppColors.white),
                           ),
                         ],
@@ -142,15 +121,15 @@ class SignUpScreen extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Already have an account?',
+                    "Don't have an account?",
                     style: bodyMedium14.copyWith(color: AppColors.kBSDark),
                   ),
                   TextButton(
                     onPressed: () {
-                      context.navigateToScreen(isReplaced: true, child: LoginScreen());
+                      context.navigateToScreen(child: SignUpScreen());
                     },
                     child: Text(
-                      'Signin',
+                      'SignUp',
                       style: bodyMedium14.copyWith(color: AppColors.kBSDark),
                     ),
                   ),
