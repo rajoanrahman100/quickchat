@@ -1,14 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quick_chat/constants/app_assets.dart';
 import 'package:quick_chat/constants/app_colors.dart';
 import 'package:quick_chat/constants/context_extention.dart';
 import 'package:quick_chat/constants/text_styles.dart';
+import 'package:quick_chat/feature/chat_sceen/chat_screen.dart';
+import 'package:quick_chat/feature/login_screen/login_screen.dart';
+import 'package:quick_chat/main.dart';
 import 'package:quick_chat/model/user_model.dart';
 import 'package:quick_chat/riverpod/auth_provider.dart';
-import 'package:quick_chat/ui/chat_sceen/chat_screen.dart';
-import 'package:quick_chat/ui/login_screen/login_screen.dart';
+
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -23,6 +27,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
     // ref.read(authProvider).fetchUserFromFirebase(AppAssets.userCollection);
+    // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    //   RemoteNotification? notification = message.notification;
+    //   AndroidNotification? android = message.notification?.android;
+    //   if (android != null) {
+    //     flutterLocalNotificationsPlugin.show(
+    //         notification.hashCode,
+    //         notification!.title,
+    //         notification.body,
+    //         NotificationDetails(
+    //           android: AndroidNotificationDetails(
+    //               channel.id, channel.name, channelDescription: channel.description,
+    //               color: Colors.blue,
+    //               playSound: true,
+    //               icon: '@mipmap/ic_launcher'),
+    //         ));
+    //   }
+    // });
     super.initState();
   }
 

@@ -1,25 +1,86 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:chat_bubbles/bubbles/bubble_special_three.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:quick_chat/constants/app_colors.dart';
 import 'package:quick_chat/constants/text_styles.dart';
 import 'package:quick_chat/network/chat_service.dart';
 
-class ChatScreen extends StatelessWidget {
+class ChatScreen extends StatefulWidget {
   final String id;
   final String name;
   final String email;
 
   ChatScreen({super.key, required this.id, required this.name, required this.email});
 
+  @override
+  State<ChatScreen> createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController messageController = TextEditingController();
 
   final ChatService chatService = ChatService();
 
   final FirebaseAuth auth = FirebaseAuth.instance;
+
+  String myToken = "";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    requestPermission();
+    getToken();
+  }
+
+  void getToken() async {
+    await FirebaseMessaging.instance.getToken().then((value) {
+      myToken = value.toString();
+      log("My Token $myToken");
+    });
+  }
+
+  void requestPermission() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+  }
+
+  void sendPusMessage(String token, String title, String body) async {
+    try {
+      await http.post(Uri.parse('https://fcm.googleapis.com/fcm/send'),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization':
+                'key=AAAA-UIAaQk:APA91bEKGm9xIR7I3OnxB7wUls64JVkNeB_YDczbOrFONhAFOBcufXT_29PuaviB-7D4cSKou_7_VSIO4urSTdOfVJ5zxHdRe414wOdKUe82Y2Km0jJHZLWLsZ1Z2AXG5qmxMJG1BZLT',
+          },
+          body: jsonEncode(<String, dynamic>{
+            'priority': 'high',
+            'data': <String, dynamic>{'click_action': 'FLUTTER_NOTIFICATION_CLICK', 'status': 'done', 'body': body, 'title': title},
+            'notification': <String, dynamic>{'title': title, 'body': body, 'android_channel_id': 'quick_chat'},
+            'to': token,
+          }));
+    } catch (e) {
+      print(e);
+      throw Exception(e.toString());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +91,7 @@ class ChatScreen extends StatelessWidget {
         centerTitle: true,
         elevation: 0.0,
         title: Text(
-          email,
+          widget.email,
           style: bodySemiBold14.copyWith(color: AppColors.kBSDark),
         ),
       ),
@@ -48,7 +109,7 @@ class ChatScreen extends StatelessWidget {
 
   Widget _buildMessageList() {
     return StreamBuilder(
-        stream: chatService.getMessages(id, auth.currentUser!.uid),
+        stream: chatService.getMessages(widget.id, auth.currentUser!.uid),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -91,7 +152,6 @@ class ChatScreen extends StatelessWidget {
                     textStyle: bodyMedium14.copyWith(color: AppColors.kBSDark),
                   ),
             Text(message["senderEmail"]),
-
           ],
         ),
       ),
@@ -120,8 +180,12 @@ class ChatScreen extends StatelessWidget {
         ),
         const Gap(10.0),
         GestureDetector(
-          onTap: () {
-            chatService.writeMessage(messageController, id);
+          onTap: () async {
+            DocumentSnapshot userSnapshot = await FirebaseFirestore.instance.collection('user').doc(widget.id).get();
+            String fcmToken = userSnapshot['fcm'];
+            log("Receiver FCM $fcmToken");
+            //chatService.writeMessage(messageController, widget.id);
+            sendPusMessage(fcmToken, "Quick Chat", "You have new message");
           },
           child: const Icon(
             Icons.send,
