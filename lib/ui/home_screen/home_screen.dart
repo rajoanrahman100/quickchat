@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quick_chat/constants/app_assets.dart';
 import 'package:quick_chat/constants/app_colors.dart';
 import 'package:quick_chat/constants/context_extention.dart';
 import 'package:quick_chat/constants/text_styles.dart';
+import 'package:quick_chat/model/user_model.dart';
 import 'package:quick_chat/riverpod/auth_provider.dart';
+import 'package:quick_chat/ui/chat_sceen/chat_screen.dart';
 import 'package:quick_chat/ui/login_screen/login_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -15,9 +18,11 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  FirebaseAuth auth = FirebaseAuth.instance;
+
   @override
   void initState() {
-    ref.read(authProvider).fetchUserFromFirebase(AppAssets.userCollection);
+    // ref.read(authProvider).fetchUserFromFirebase(AppAssets.userCollection);
     super.initState();
   }
 
@@ -47,22 +52,47 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           })
         ],
       ),
-      body: Consumer(
-        builder: (BuildContext context, WidgetRef ref, Widget? child) {
-          final authNotifier = ref.watch(authProvider);
-          if (authNotifier.users!.isEmpty) {
-            return const Center(child: CircularProgressIndicator());
+      body: FutureBuilder(
+        future: ref.read(authProvider).fetchUserFromFirebase(AppAssets.userCollection),
+        builder: (BuildContext context, AsyncSnapshot<List<ChatUser>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+                child: CircularProgressIndicator(
+              backgroundColor: AppColors.black,
+              color: AppColors.surfaceColor,
+            ));
           } else {
             return ListView.builder(
-              itemCount: authNotifier.users!.length,
-              itemBuilder: (context, index) {
-                ChatUser user = authNotifier.users![index];
-                return ListTile(
-                  title: Text(user.name),
-                  subtitle: Text(user.email),
-                );
-              },
-            );
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  ChatUser user = snapshot.data![index];
+                  return auth.currentUser!.email != user.email
+                      ? GestureDetector(
+                          onTap: () {
+                            context.navigateToScreen(child: ChatScreen(id: user.id, name: user.name, email: user.email));
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              color: AppColors.white,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            padding: const EdgeInsets.all(10.0),
+                            child: ListTile(
+                              title: Text(
+                                user.name,
+                                style: bodySemiBold16,
+                              ),
+                              subtitle: Text(user.email),
+                              trailing: const Icon(
+                                Icons.chat,
+                                color: AppColors.black,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Container();
+                });
           }
         },
       ),

@@ -59,6 +59,13 @@ class Validations {
     return null;
   }
 
+  static String? validateMessage(String? value) {
+    if (value == null || value.isEmpty) {
+      return null;
+    }
+    return null;
+  }
+
   static String? validateDate(String? value) {
     if (value == null || value.isEmpty) {
       return "Date is required";

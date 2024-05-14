@@ -3,6 +3,7 @@ class AppAssets{
   //Collection Name
   static const String userCollection="user";
   static const String chatCollection="chats";
+  static const String messageCollection="messages";
 
 
   static const String assetLottie="assets/lottie";

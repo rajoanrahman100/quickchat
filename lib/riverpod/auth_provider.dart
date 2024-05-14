@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quick_chat/constants/app_assets.dart';
+import 'package:quick_chat/model/user_model.dart';
 import 'package:quick_chat/network/firebase_auth.dart';
 import 'package:quick_chat/network/firebase_service.dart';
 
@@ -98,18 +99,4 @@ class AuthProvider extends ChangeNotifier {
   }
 }
 
-class ChatUser {
-  final String id;
-  final String name;
-  final String email;
 
-  ChatUser({required this.id, required this.name, required this.email});
-
-  factory ChatUser.fromMap(Map<String, dynamic> data, String id) {
-    return ChatUser(
-      id: id,
-      name: data['name'],
-      email: data['email'],
-    );
-  }
-}
