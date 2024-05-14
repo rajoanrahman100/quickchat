@@ -1,9 +1,12 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:quick_chat/constants/app_assets.dart';
 import 'package:quick_chat/network/firebase_auth.dart';
 import 'package:quick_chat/network/firebase_service.dart';
-import 'package:quick_chat/repository/auth_repository.dart';
 
 final authProvider = ChangeNotifierProvider<AuthProvider>((ref) {
   return AuthProvider();
@@ -15,6 +18,10 @@ class AuthProvider extends ChangeNotifier {
   Map<String, String> _userData = {};
   FirebaseAuthClass auth = FirebaseAuthClass();
   FireStoreService fstore = FireStoreService();
+
+  List<ChatUser>? _users;
+
+  List<ChatUser>? get users => _users;
 
   bool get isLoading => _isLoading;
 
@@ -40,7 +47,7 @@ class AuthProvider extends ChangeNotifier {
     try {
       _userCredential = await auth.signUpUserWithFirebase(email, password, name);
       final data = {"name": name, "email": email, "uid": _userCredential!.user!.uid, "password": password};
-      bool isSuccess = await addUserToDatabase(data, "user", _userCredential!.user!.uid);
+      bool isSuccess = await addUserToDatabase(data, AppAssets.userCollection, _userCredential!.user!.uid);
       if (isSuccess) {
         setLoader(false);
         return _userCredential!;
@@ -52,6 +59,18 @@ class AuthProvider extends ChangeNotifier {
       print(e);
       setLoader(false);
       return Future.error(e);
+    }
+  }
+
+  Future<List<ChatUser>> fetchUserFromFirebase(String collectionName) async {
+    try {
+      QuerySnapshot querySnapshot = await fstore.getUserDataFromFireStore(collectionName);
+      _users = querySnapshot.docs.map((doc) => ChatUser.fromMap(doc.data() as Map<String, dynamic>, doc.id)).toList();
+      log(_users!.length.toString()); ;
+      return _users!;
+    } catch (e) {
+      print(e);
+      throw Exception(e.toString());
     }
   }
 
@@ -69,12 +88,28 @@ class AuthProvider extends ChangeNotifier {
     return value;
   }
 
-  void logOutUser(){
+  void logOutUser() {
     auth.signOutUser();
   }
 
   setLoader(bool loader) {
     _isLoading = loader;
     notifyListeners();
+  }
+}
+
+class ChatUser {
+  final String id;
+  final String name;
+  final String email;
+
+  ChatUser({required this.id, required this.name, required this.email});
+
+  factory ChatUser.fromMap(Map<String, dynamic> data, String id) {
+    return ChatUser(
+      id: id,
+      name: data['name'],
+      email: data['email'],
+    );
   }
 }

@@ -30,10 +30,11 @@ class FireStoreService extends BaseFireStoreService {
   }
 
   @override
-  Future<void> getUserDataFromFireStore(String collectionName, String docName) async {
+  Future<QuerySnapshot> getUserDataFromFireStore(String collectionName) async {
     // TODO: implement getUserDataFromFireStore
     try {
-      final userData = await _fireStore.collection(collectionName).get();
+      QuerySnapshot querySnapshot = await _fireStore.collection(collectionName).get();
+      return querySnapshot;
     } catch (e) {
       print(e);
       throw Exception(e.toString());
