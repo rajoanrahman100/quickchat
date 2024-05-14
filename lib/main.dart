@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quick_chat/constants/app_theme.dart';
 import 'package:quick_chat/helper/firebase_options.dart';
-import 'package:quick_chat/ui/home_screen.dart';
+import 'package:quick_chat/ui/home_screen/home_screen.dart';
 import 'package:quick_chat/ui/login_screen/login_screen.dart';
 import 'package:quick_chat/ui/sign_up_screen/signup_screen.dart';
 

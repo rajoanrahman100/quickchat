@@ -7,7 +7,7 @@ import 'package:quick_chat/constants/context_extention.dart';
 import 'package:quick_chat/constants/text_styles.dart';
 import 'package:quick_chat/helper/validation.dart';
 import 'package:quick_chat/riverpod/auth_provider.dart';
-import 'package:quick_chat/ui/home_screen.dart';
+import 'package:quick_chat/ui/home_screen/home_screen.dart';
 import 'package:quick_chat/ui/sign_up_screen/signup_screen.dart';
 
 class LoginScreen extends ConsumerWidget {
@@ -102,7 +102,7 @@ class LoginScreen extends ConsumerWidget {
                     ? const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          CircularProgressIndicator(),
+                          SizedBox(height: 20,width: 20,child: CircularProgressIndicator(color: AppColors.white,strokeWidth: 2.0,)),
                         ],
                       )
                     : Row(
