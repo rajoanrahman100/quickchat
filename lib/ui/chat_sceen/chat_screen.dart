@@ -1,8 +1,9 @@
+import 'package:chat_bubbles/bubbles/bubble_special_three.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 import 'package:quick_chat/constants/app_colors.dart';
 import 'package:quick_chat/constants/text_styles.dart';
 import 'package:quick_chat/network/chat_service.dart';
@@ -22,13 +23,6 @@ class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController messageController = TextEditingController();
   final ChatService chatService = ChatService();
   final FirebaseAuth auth = FirebaseAuth.instance;
-
-  void sendMessage() async {
-    if (messageController.text.isNotEmpty) {
-      await chatService.sendMessage(widget.id, messageController.text);
-      messageController.clear();
-    }
-  }
 
   @override
   void initState() {
@@ -80,7 +74,8 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget _buildMessageItem(DocumentSnapshot data) {
     Map<String, dynamic> message = data.data() as Map<String, dynamic>;
     var alignment = (message['senderID'] == auth.currentUser!.uid) ? Alignment.centerRight : Alignment.centerLeft;
-
+    DateTime dateTime = message["timestamp"].toDate();
+    String formattedDateTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(dateTime);
     return Container(
       alignment: alignment,
       child: Padding(
@@ -89,8 +84,22 @@ class _ChatScreenState extends State<ChatScreen> {
           crossAxisAlignment: (message["senderID"] == auth.currentUser!.uid) ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           mainAxisAlignment: (message["senderID"] == auth.currentUser!.uid) ? MainAxisAlignment.end : MainAxisAlignment.start,
           children: [
+            message["senderID"] == auth.currentUser!.uid
+                ? BubbleSpecialThree(
+                    text: message["message"],
+                    color: AppColors.white,
+                    tail: true,
+                    textStyle: bodyMedium14.copyWith(color: AppColors.kBSDark),
+                  )
+                : BubbleSpecialThree(
+                    text: message["message"],
+                    color: AppColors.white,
+                    tail: false,
+                    isSender: false,
+                    textStyle: bodyMedium14.copyWith(color: AppColors.kBSDark),
+                  ),
             Text(message["senderEmail"]),
-            Text(message["message"]),
+
           ],
         ),
       ),
@@ -120,7 +129,7 @@ class _ChatScreenState extends State<ChatScreen> {
         const Gap(10.0),
         GestureDetector(
           onTap: () {
-            sendMessage();
+            chatService.writeMessage(messageController, widget.id);
           },
           child: const Icon(
             Icons.send,

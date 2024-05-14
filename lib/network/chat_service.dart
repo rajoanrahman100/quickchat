@@ -40,4 +40,11 @@ class ChatService extends ChangeNotifier {
         .orderBy('timestamp', descending: false)
         .snapshots();
   }
+
+  void writeMessage(TextEditingController messageController, id) async {
+    if (messageController.text.isNotEmpty) {
+      await sendMessage(id, messageController.text);
+      messageController.clear();
+    }
+  }
 }
